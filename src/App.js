@@ -7,7 +7,7 @@ export default class App extends React.Component {
     return (
       <div className='App'>
         <Header>
-          <Route path='/' component={Header} />
+          <Route exact path='/' component={Header} />
         </Header>
         <Sidebar>
           <Route path='/' component={MainSidebar} />
