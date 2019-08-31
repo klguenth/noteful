@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function Note() {
-    render (
+export default class Note extends React.Component {
+    render() {
         return (
-            <h3>Note</h3>
-            <h4>Date Modified on</h4>
-        )
-    )
+            <div>
+                <h3>Note</h3>
+                <h4>Date Modified on</h4>
+                <button type="submit">Delete</button>
+            </div>
+        );
+    }
 }
