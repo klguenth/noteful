@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import NOTES from './store';
 
-export default class Note extends React.Component {
-    render() {
+export default function Note(props) {
+    const note = NOTES.find(notes =>
+        notes.id === props.match.notes.id
+    )
         return (
-            <div>
-                <h3>Note</h3>
-                <h4>Date Modified on</h4>
+            <div className="Note">
+                <h3>{note.name}</h3>
+                <h4>Date Modified on: {note.modified}</h4>
                 <button type="submit">Delete</button>
             </div>
         );
-    }
 }

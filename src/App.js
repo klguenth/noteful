@@ -5,8 +5,6 @@ import Note from './Note';
 import Folder from './Folder';
 import Sidebar from './Sidebar';
 import Main from './Main';
-import NotFoundPage from './NotFoundPage';
-import data from './store';
 
 export default class App extends React.Component {
   render() {
@@ -21,7 +19,6 @@ export default class App extends React.Component {
           <Switch>
             <Route exact path='/' component={Main} />
             <Route path='/note/:note-id' component={Note} />
-            <Route component={NotFoundPage} />
           </Switch>
         </Main>
       </div>
