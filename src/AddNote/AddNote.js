@@ -2,8 +2,10 @@ import React from 'react'
 import ApiContext from '../ApiContext';
 import config from '../config';
 import CircleButton from '../CircleButton/CircleButton';
+import Note from '../Note/Note'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findNote, findFolder } from '../notes-helpers';
+import { getNotesForFolder } from '../notes-helpers'
 
 export default class AddNote extends React.Component {
         
@@ -17,6 +19,7 @@ export default class AddNote extends React.Component {
         const newNote = {};
         newNote.name = event.target.name.value;
         newNote.content = event.target.content.value;
+        newNote.folderId = event.target.folders.name.value;
         const noteId = this.props.id
     
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
@@ -69,9 +72,9 @@ export default class AddNote extends React.Component {
                     <div className="form-group">
                         <label htmlFor="folderSelect">Folder Select</label>
                         <select className="folderSelect">
-                            <option>Important</option>
-                            <option>Super</option>
-                            <option>Spangley</option>
+                            <option name="Important">Important</option>
+                            <option name="Super">Super</option>
+                            <option name="Spangley">Spangley</option>
                         </select>
                     </div>
 
