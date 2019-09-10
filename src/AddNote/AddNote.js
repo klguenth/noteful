@@ -9,6 +9,9 @@ export default class AddNote extends React.Component {
     
       handleAddNote = e => {
         e.preventDefault()
+        const newNote = {};
+        newNote.name = event.target.name.value;
+        newNote.content = event.target.content.value;
         const noteId = this.props.id
     
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
@@ -16,6 +19,7 @@ export default class AddNote extends React.Component {
         headers: {
           'content-type': 'application/json'
         },
+        body: JSON.stringify(newNote)
         })
         .then(res => {
           if (!res.ok)

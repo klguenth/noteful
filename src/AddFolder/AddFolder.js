@@ -9,6 +9,8 @@ export default class AddFolder extends React.Component {
     
       handleAddFolder = e => {
         e.preventDefault()
+        const newFolder = {}
+        newFolder.name = event.target.name.value
         const folderId = this.props.id
     
     fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
@@ -16,6 +18,7 @@ export default class AddFolder extends React.Component {
         headers: {
           'content-type': 'application/json'
         },
+        body: JSON.stringify(newFolder)
       })
         .then(res => {
           if (!res.ok)
