@@ -68,6 +68,11 @@ export default class AddNote extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="folderSelect">Folder Select</label>
+                        <select className="folderSelect">
+                            <option>Important</option>
+                            <option>Super</option>
+                            <option>Spangley</option>
+                        </select>
                     </div>
 
                     <div className="note-button">
