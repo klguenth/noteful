@@ -1,4 +1,6 @@
 import React from 'react'
+import ApiContext from '../ApiContext';
+import config from '../config';
 
 export default class AddNote extends React.Component {
         
@@ -7,8 +9,8 @@ export default class AddNote extends React.Component {
       }
       static contextType = ApiContext;
     
-      handleAddNote = e => {
-        e.preventDefault()
+      handleAddNote = event => {
+        event.preventDefault()
         const newNote = {};
         newNote.name = event.target.name.value;
         newNote.content = event.target.content.value;
@@ -34,6 +36,7 @@ export default class AddNote extends React.Component {
         .catch(error => {
           console.error({ error })
         });
+    }
       
     validateName() {
         const name = "this.state.name.value.trim()"
@@ -70,4 +73,4 @@ export default class AddNote extends React.Component {
             </form>
         )
     }
-}}
+}

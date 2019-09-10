@@ -1,14 +1,17 @@
 import React from 'react'
+import ApiContext from '../ApiContext';
+import config from '../config';
+import PropTypes from 'prop-types'
 
 export default class AddFolder extends React.Component {
     
-    static defaultProps ={
+    static defaultProps = {
         addFolder: () => {},
       }
       static contextType = ApiContext;
     
-      handleAddFolder = e => {
-        e.preventDefault()
+      handleAddFolder = event => {
+        event.preventDefault()
         const newFolder = {}
         newFolder.name = event.target.name.value
         const folderId = this.props.id
@@ -33,6 +36,7 @@ export default class AddFolder extends React.Component {
         .catch(error => {
           console.error({ error })
         });
+      }
 
     render() {
         return (
@@ -51,9 +55,9 @@ export default class AddFolder extends React.Component {
                     </button>
                 </div>
             </form>
-        )
+        );
     }
-}}
+}
 
 AddFolder.propTypes = {
     value: PropTypes.string
