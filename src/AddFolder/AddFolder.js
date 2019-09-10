@@ -51,3 +51,7 @@ export default class AddFolder extends React.Component {
         )
     }
 }}
+
+AddFolder.propTypes = {
+    value: PropTypes.string
+}

@@ -11,3 +11,7 @@ export default function NotefulForm(props) {
     />
   )
 }
+
+NotefulForm.PropTypes = {
+  value: PropTypes.string
+}

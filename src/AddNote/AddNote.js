@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class AddNote extends React.Component {
         
-    static defaultProps ={
+    static defaultProps = {
         addNote: () => {},
       }
       static contextType = ApiContext;
@@ -16,7 +16,7 @@ export default class AddNote extends React.Component {
         headers: {
           'content-type': 'application/json'
         },
-      })
+        })
         .then(res => {
           if (!res.ok)
             return res.json().then(e => Promise.reject(e))
@@ -30,7 +30,7 @@ export default class AddNote extends React.Component {
         .catch(error => {
           console.error({ error })
         });
-
+      
     validateName() {
         const name = "this.state.name.value.trim()"
         if (name.length === 0) {
