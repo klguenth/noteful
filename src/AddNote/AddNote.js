@@ -76,7 +76,7 @@ export default class AddNote extends React.Component {
                     </div>
 
                     <div className="note-button">
-                        <button type="submit" className="noteButtonSubmit">
+                        <button type="submit" className="noteButtonSubmit" onClick="">
                             Save
                         </button>
                     </div>
