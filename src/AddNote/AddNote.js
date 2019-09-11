@@ -11,17 +11,18 @@ export default class AddNote extends React.Component {
     static defaultProps = {
         addNote: () => {},
       }
-      static contextType = ApiContext;
+    static contextType = ApiContext;
 
       handleAddNote = event => {
         event.preventDefault()
         const newNote = {};
         newNote.name = event.target.name.value;
         newNote.content = event.target.content.value;
-        newNote.folderId = event.target.folders.name.value;
-        const noteId = this.props.id
-    
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+        newNote.folderId = event.target.folder.value;
+        newNote.noteId = this.props.id;
+        const noteId = this.props.id;
+        
+    fetch(`${config.API_ENDPOINT}/notes`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -50,13 +51,15 @@ export default class AddNote extends React.Component {
     }
     
     render() {
-        const { notes, folders, } = this.context
+        const { notes, folders } = this.context
         const { noteId } = this.props.match.params
         const note = findNote(notes, noteId) || {}
         const folder = findFolder(folders, note.folderId)
+        const myFolders = folders.map((folder, index) => <option key={index} value={folder.id}>{folder.name}</option>)
+        console.log(myFolders)
         return (
             <div>
-                <form className="createNote">
+                <form className="createNote" onSubmit={this.handleAddNote}>
                     <h2>Add Note</h2>
                     <div className="form-group">
                         <div className="noteHint">* required</div>
@@ -69,10 +72,8 @@ export default class AddNote extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="folderSelect">Folder Select</label>
-                        <select className="folderSelect">
-                            <option name="Important">Important</option>
-                            <option name="Super">Super</option>
-                            <option name="Spangley">Spangley</option>
+                        <select className="folderSelect" name="folder">
+                            { myFolders }
                         </select>
                     </div>
 

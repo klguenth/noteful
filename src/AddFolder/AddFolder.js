@@ -9,38 +9,38 @@ import { findNote, findFolder } from '../notes-helpers';
 export default class AddFolder extends React.Component {
     
     static defaultProps = {
-        addFolder: () => {},
-      }
-      static contextType = ApiContext;
+      addFolder: () => {},
+    }
+    static contextType = ApiContext;
     
-      handleAddFolder = event => {
-        event.preventDefault()
-        const newFolder = {}
-        newFolder.name = event.target.name.value
-        const folderId = this.props.id
+    handleAddFolder = event => {
+      event.preventDefault();
+      const newFolder = {};
+      newFolder.name = event.target.name.value;
+      const folderId = this.props.id;
 
-    fetch(`${config.API_ENDPOINT}/folders/`, {
+      fetch(`${config.API_ENDPOINT}/folders/`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
         body: JSON.stringify(newFolder)
       })
-        .then(res => {
-          if (!res.ok)
-            return res.json().then(e => Promise.reject(e))
-          return res.json()
-        })
-        .then(() => {
-          // this.context.addFolder(folderId)
-          // allow parent to perform extra behaviour
-          this.props.addFolder(folderId, newFolder)
-          console.log(newFolder);
-        })
-        .catch(error => {
-          console.error({ error })
-        });
-      }
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
+      .then(() => {
+        // this.context.addFolder(folderId)
+        // allow parent to perform extra behaviour
+        this.props.addFolder(folderId, newFolder)
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        console.error({ error })
+      });
+    }
 
     render() {
       const { notes, folders, } = this.context
@@ -50,14 +50,14 @@ export default class AddFolder extends React.Component {
 
         return (
           <div>
-            <form className="createFolder">
+            <form className="createFolder" onSubmit={this.handleAddFolder}>
                 <h2>Add Folder</h2>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input type="text" className="name" name="name" id="name" />
                 </div>
                 <div className="createFolderButtons">
-                    <button type="submit" className="buttonSubmit" onClick={this.handleAddFolder}>
+                    <button type="submit" className="buttonSubmit">
                         Save
                     </button>
                 </div>
@@ -80,7 +80,7 @@ export default class AddFolder extends React.Component {
             )}
           </div>
         </div>
-        );
+      );
     }
 }
 
