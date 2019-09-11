@@ -18,8 +18,8 @@ export default class AddFolder extends React.Component {
         const newFolder = {}
         newFolder.name = event.target.name.value
         const folderId = this.props.id
-    
-    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
+
+    fetch(`${config.API_ENDPOINT}/folders/`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -32,9 +32,10 @@ export default class AddFolder extends React.Component {
           return res.json()
         })
         .then(() => {
-          this.context.addFolder(folderId)
+          // this.context.addFolder(folderId)
           // allow parent to perform extra behaviour
-          this.props.addFolder(folderId)
+          this.props.addFolder(folderId, newFolder)
+          console.log(newFolder);
         })
         .catch(error => {
           console.error({ error })
@@ -46,6 +47,7 @@ export default class AddFolder extends React.Component {
       const { noteId } = this.props.match.params
       const note = findNote(notes, noteId) || {}
       const folder = findFolder(folders, note.folderId)
+
         return (
           <div>
             <form className="createFolder">
@@ -55,7 +57,7 @@ export default class AddFolder extends React.Component {
                     <input type="text" className="name" name="name" id="name" />
                 </div>
                 <div className="createFolderButtons">
-                    <button type="submit" className="buttonSubmit">
+                    <button type="submit" className="buttonSubmit" onClick={this.handleAddFolder}>
                         Save
                     </button>
                 </div>

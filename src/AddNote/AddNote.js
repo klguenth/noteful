@@ -4,7 +4,7 @@ import config from '../config';
 import CircleButton from '../CircleButton/CircleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findNote, findFolder } from '../notes-helpers';
-import { getNotesForFolder } from '../notes-helpers'
+//import { getNotesForFolder } from '../notes-helpers'
 
 export default class AddNote extends React.Component {
         
