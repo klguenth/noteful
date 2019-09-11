@@ -2,7 +2,6 @@ import React from 'react'
 import ApiContext from '../ApiContext';
 import config from '../config';
 import CircleButton from '../CircleButton/CircleButton';
-import Note from '../Note/Note'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findNote, findFolder } from '../notes-helpers';
 import { getNotesForFolder } from '../notes-helpers'
@@ -13,7 +12,7 @@ export default class AddNote extends React.Component {
         addNote: () => {},
       }
       static contextType = ApiContext;
-    
+
       handleAddNote = event => {
         event.preventDefault()
         const newNote = {};
@@ -36,7 +35,6 @@ export default class AddNote extends React.Component {
         })
         .then(() => {
           this.context.addNote(noteId)
-          // allow parent to perform extra behaviour
           this.props.addNote(noteId)
         })
         .catch(error => {
@@ -79,7 +77,7 @@ export default class AddNote extends React.Component {
                     </div>
 
                     <div className="note-button">
-                        <button type="submit" className="noteButtonSubmit" onClick="">
+                        <button type="submit" className="noteButtonSubmit" onClick={this.handleAddNote()}>
                             Save
                         </button>
                     </div>
