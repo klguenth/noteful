@@ -49,6 +49,13 @@ export default class AddNote extends React.Component {
             return 'Name is required';
         }
     }
+
+    validateContent() {
+        const content = "this.state.content.value.trim()"
+        if (content.length === 0) {
+            return 'Please add a note';
+        }
+    }
     
     render() {
         const { notes, folders } = this.context
