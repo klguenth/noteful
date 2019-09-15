@@ -71,21 +71,39 @@ export default class AddNote extends React.Component {
                     <div className="form-group">
                         <div className="noteHint">* required</div>
                         <label htmlFor="name">Name*</label>
-                        <input type="text" className="noteName" name="name" id="noteName" />
+                        <input 
+                            type="text" 
+                            className="noteName" 
+                            aria-label="note name"
+                            aria-required="true"
+                            name="name" 
+                            id="noteName" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="content">Content</label>
-                        <input type="text" className="noteContent" name="content" id="noteContent" />
+                        <input 
+                            type="text" 
+                            className="noteContent"
+                            aria-label="note content"
+                            aria-required="true" 
+                            name="content" 
+                            id="noteContent" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="folderSelect">Folder Select</label>
-                        <select className="folderSelect" name="folder">
+                        <select 
+                            className="folderSelect"
+                            aria-label="select folder" 
+                            name="folder">
                             { myFolders }
                         </select>
                     </div>
 
                     <div className="note-button">
-                        <button type="submit" className="noteButtonSubmit">
+                        <button 
+                            type="submit" 
+                            className="noteButtonSubmit"
+                            aria-label="save button">
                             Save
                         </button>
                     </div>
@@ -94,6 +112,7 @@ export default class AddNote extends React.Component {
                 <CircleButton
                     tag='button'
                     role='link'
+                    aria-label="back button"
                     onClick={() => this.props.history.goBack()}
                     className='NotePageNav__back-button'
                 >

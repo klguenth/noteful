@@ -53,11 +53,19 @@ export default class AddFolder extends React.Component {
             <form className="createFolder" onSubmit={this.handleAddFolder}>
                 <h2>Add Folder</h2>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="name" name="name" id="name" />
+                    <label htmlFor="folderName">Name</label>
+                    <input 
+                      type="text" 
+                      className="name" 
+                      aria-label="folder name"
+                      name="name" 
+                      id="name" />
                 </div>
                 <div className="createFolderButtons">
-                    <button type="submit" className="buttonSubmit">
+                    <button 
+                      type="submit" 
+                      className="buttonSubmit"
+                      aria-label="submit button">
                         Save
                     </button>
                 </div>
@@ -66,6 +74,7 @@ export default class AddFolder extends React.Component {
             <CircleButton
               tag='button'
               role='link'
+              aria-label='back button'
               onClick={() => this.props.history.goBack()}
               className='NotePageNav__back-button'
             >

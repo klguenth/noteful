@@ -50,6 +50,7 @@ export default class Note extends React.Component {
         <button
           className='Note__delete'
           type='button'
+          aria-label='delete button'
           onClick={this.handleClickDelete}
         >
           <FontAwesomeIcon icon='trash-alt' />
