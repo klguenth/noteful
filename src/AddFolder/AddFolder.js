@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import PropTypes from 'prop-types';
@@ -71,17 +72,20 @@ export default class AddFolder extends React.Component {
                 </div>
             </form>
             <div className='NotePageNav'>
-            <CircleButton
-              tag='button'
-              role='link'
-              aria-label='back button'
-              onClick={() => this.props.history.goBack()}
-              className='NotePageNav__back-button'
-            >
-              <FontAwesomeIcon icon='chevron-left' />
-              <br />
-              Back
-            </CircleButton>
+            <Link to='/'>
+              <CircleButton
+                tag={Link}
+                to='/'
+                role='link'
+                aria-label='back button'
+                onClick={() => this.props.history.goBack()}
+                className='NotePageNav__back-button'
+              >
+                <FontAwesomeIcon icon='chevron-left' />
+                <br />
+                Back
+              </CircleButton>
+            </Link>
             {folder && (
               <h3 className='NotePageNav__folder-name'>
                 {folder.name}

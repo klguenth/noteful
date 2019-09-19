@@ -4,7 +4,6 @@ import config from '../config';
 import CircleButton from '../CircleButton/CircleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findNote, findFolder } from '../notes-helpers';
-//import { getNotesForFolder } from '../notes-helpers'
 
 export default class AddNote extends React.Component {
         
@@ -63,7 +62,6 @@ export default class AddNote extends React.Component {
         const note = findNote(notes, noteId) || {}
         const folder = findFolder(folders, note.folderId)
         const myFolders = folders.map((folder, index) => <option key={index} value={folder.id}>{folder.name}</option>)
-        console.log(myFolders)
         return (
             <div>
                 <form className="createNote" onSubmit={this.handleAddNote}>
