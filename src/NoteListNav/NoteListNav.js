@@ -12,6 +12,7 @@ export default class NoteListNav extends React.Component {
   render() {
     const { folders=[], notes=[] } = this.context
     return (
+      <>
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
           {folders.map(folder =>
@@ -41,6 +42,7 @@ export default class NoteListNav extends React.Component {
           </CircleButton>
         </div>
       </div>
+      </>
     )
   }
 }

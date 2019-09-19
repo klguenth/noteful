@@ -72,7 +72,6 @@ export default class AddFolder extends React.Component {
                 </div>
             </form>
             <div className='NotePageNav'>
-            <Link to='/'>
               <CircleButton
                 tag={Link}
                 to='/'
@@ -85,7 +84,6 @@ export default class AddFolder extends React.Component {
                 <br />
                 Back
               </CircleButton>
-            </Link>
             {folder && (
               <h3 className='NotePageNav__folder-name'>
                 {folder.name}

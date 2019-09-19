@@ -21,34 +21,36 @@ export default class NoteListMain extends React.Component {
     const { notes=[] } = this.context
     const notesForFolder = getNotesForFolder(notes, folderId)
     return (
-      <section className='NoteListMain'>
-        <ul>
-          {notesForFolder.map(note =>
-            <li key={note.id}>
-              <Note
-                id={note.id}
-                name={note.name}
-                modified={note.modified}
-              />
-            </li>
-          )}
-        </ul>
-        <div className='NoteListMain__button-container'>
-          <Link to='/add-note'>
-            <CircleButton
-              tag={ Link }
-              to='/add-note'
-              type='button'
-              aria-label='add note button'
-              className='NoteListMain__add-note-button'
-            >
-              <FontAwesomeIcon icon='plus' />
-              <br />
-              Note
-            </CircleButton>
-          </Link>
-        </div>
-      </section>
+      <>
+        <section className='NoteListMain'>
+          <>
+              <ul>
+                {notesForFolder.map(note =>
+                  <li key={note.id}>
+                    <Note
+                      id={note.id}
+                      name={note.name}
+                      modified={note.modified}
+                    />
+                  </li>
+                )}
+              </ul>
+            </>
+          <div className='NoteListMain__button-container'>
+              <CircleButton
+                tag={ Link }
+                to='/add-note'
+                type='button'
+                aria-label='add note button'
+                className='NoteListMain__add-note-button'
+              >
+                <FontAwesomeIcon icon='plus' />
+                <br />
+                Note
+              </CircleButton>
+          </div>
+        </section>
+      </>
     )
   }
 }

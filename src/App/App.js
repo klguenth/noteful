@@ -87,18 +87,20 @@ class App extends Component {
         };
         return (
             <ApiContext.Provider value={value}>
-                <div className="App">
-                    <NotefulError>
-                    <nav className="App__nav">{this.renderNavRoutes()}</nav>
-                    <header className="App__header">
-                        <h1>
-                            <Link to="/">Noteful</Link>{' '}
-                            <FontAwesomeIcon icon="check-double" />
-                        </h1>
-                    </header>
-                    <main className="App__main">{this.renderMainRoutes()}</main>
-                    </NotefulError>
-                </div>
+                <>
+                    <div className="App">
+                        <NotefulError>
+                            <nav className="App__nav">{this.renderNavRoutes()}</nav>
+                            <header className="App__header">
+                                <h1>
+                                    <Link to="/">Noteful</Link>{' '}
+                                    <FontAwesomeIcon icon="check-double" />
+                                </h1>
+                            </header>
+                            <main className="App__main">{this.renderMainRoutes()}</main>
+                        </NotefulError>
+                    </div>
+                </>
             </ApiContext.Provider>
         );
     }
