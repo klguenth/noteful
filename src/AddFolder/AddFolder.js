@@ -17,8 +17,11 @@ export default class AddFolder extends React.Component {
     handleAddFolder = event => {
       event.preventDefault();
       const newFolder = {};
-      newFolder.name = event.target.name.value;
       const folderId = this.props.id;
+      newFolder.name = event.target.name.value;
+      this.setState({
+        folders: this.context.folders.includes(folder => folder.id)
+      });
 
       fetch(`${config.API_ENDPOINT}/folders/`, {
         method: 'POST',
