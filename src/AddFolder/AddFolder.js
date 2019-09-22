@@ -17,7 +17,6 @@ export default class AddFolder extends React.Component {
     handleAddFolder = event => {
       event.preventDefault();
       const newFolder = {};
-      const folderId = this.props.id;
       newFolder.name = event.target.name.value;
 
       fetch(`${config.API_ENDPOINT}/folders/`, {
@@ -32,10 +31,8 @@ export default class AddFolder extends React.Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(() => {
-        // this.context.addFolder(folderId)
-        // allow parent to perform extra behaviour
-        this.props.addFolder(folderId, newFolder)
+      .then((data) => {
+        this.context.addFolder(data)
         this.props.history.push('/');
       })
       .catch(error => {
@@ -60,6 +57,7 @@ export default class AddFolder extends React.Component {
                       className="name" 
                       aria-label="folder name"
                       name="name" 
+                      required
                       id="name" />
                 </div>
                 <div className="createFolderButtons">

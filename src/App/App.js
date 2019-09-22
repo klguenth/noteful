@@ -45,9 +45,15 @@ class App extends Component {
         });
     };
 
-    handleAddFolder = folders => {
+    handleAddFolder = folder => {
         this.setState({
-            folders: this.state.folders.push(folders => folders)
+            folders: [...this.state.folders, folder]
+        });
+    }
+
+    handleAddNote = note => {
+        this.setState({
+            notes: [...this.state.notes, note]
         });
     }
 
@@ -90,7 +96,8 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.handleDeleteNote,
-            addFolder: this.handleAddFolder
+            addFolder: this.handleAddFolder,
+            addNote: this.handleAddNote
         };
         return (
             <ApiContext.Provider value={value}>

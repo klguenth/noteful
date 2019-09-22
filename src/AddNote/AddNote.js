@@ -2,6 +2,7 @@ import React from 'react'
 import ApiContext from '../ApiContext';
 import config from '../config';
 import CircleButton from '../CircleButton/CircleButton';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findNote, findFolder } from '../notes-helpers';
 
@@ -19,7 +20,7 @@ export default class AddNote extends React.Component {
         newNote.content = event.target.content.value;
         newNote.folderId = event.target.folder.value;
         newNote.noteId = this.props.id;
-        const noteId = this.props.id;
+        newNote.modified = new Date();
         
     fetch(`${config.API_ENDPOINT}/notes`, {
         method: 'POST',
@@ -33,27 +34,14 @@ export default class AddNote extends React.Component {
             return res.json().then(e => Promise.reject(e))
           return res.json()
         })
-        .then(() => {
-          this.context.addNote(noteId)
-          this.props.addNote(noteId)
+        .then((data) => {
+          this.context.addNote(data)
+          //this.props.addNote(noteId)
+          this.props.history.push(`/folder/${data.folderId}`);
         })
         .catch(error => {
           console.error({ error })
         });
-    }
-      
-    validateName() {
-        const name = "this.state.name.value.trim()"
-        if (name.length === 0) {
-            return 'Name is required';
-        }
-    }
-
-    validateContent() {
-        const content = "this.state.content.value.trim()"
-        if (content.length === 0) {
-            return 'Please add a note';
-        }
     }
     
     render() {
@@ -75,6 +63,7 @@ export default class AddNote extends React.Component {
                                 className="noteName" 
                                 aria-label="note name"
                                 aria-required="true"
+                                required
                                 name="name" 
                                 id="noteName" />
                         </div>
@@ -84,7 +73,8 @@ export default class AddNote extends React.Component {
                                 type="text" 
                                 className="noteContent"
                                 aria-label="note content"
-                                aria-required="true" 
+                                aria-required="true"
+                                required 
                                 name="content" 
                                 id="noteContent" />
                         </div>
@@ -129,4 +119,8 @@ export default class AddNote extends React.Component {
             </>
         )
     }
+}
+
+AddNote.propTypes = {
+    id: PropTypes.string
 }
