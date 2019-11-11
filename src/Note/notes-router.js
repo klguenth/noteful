@@ -1,3 +1,5 @@
+require('dotenv').config()
+const knex = require('knex')
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
@@ -6,13 +8,38 @@ const NotesService = require('./notes-service')
 const notesRouter = express.Router()
 const jsonParser = express.json()
 
+const knexInstance = knex({
+    client: 'pg',
+    connection: process.env.DB_URL
+})
+
 const serializeNote = note => ({
     id: note.id,
-    modified: note.modified,
+    content: xss(note.content),
     date_created: note.date_created,
+    modified: note.modified,
     folder_id: folder.folder_id,
-    content: xss(note.content)
 })
+
+NotesService.getAllNotes(knexInstance)
+    .then(notes => console.log(notes))
+    .then(() =>
+        NotesService.insertNote(knexInstance, {
+            content: 'New content',
+            date_published: new Date(),
+        })
+    )
+    .then(newNote => {
+        console.log(newNote)
+        return NotesService.updateNote(
+            knexInstance,
+            newNote.id
+        ).then(() => NotesService.getById(knexInstance, newNote.id))
+    })
+    .then(note => {
+        console.log(note)
+        return NotesService.deleteNote(knexInstance, note.id)
+    })
 
 notesRouter
     .route('/')
