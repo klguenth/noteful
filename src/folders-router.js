@@ -1,12 +1,12 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const FoldersService = require('./folder-service')
+const { FoldersService } = require('./folders-service')
 
 const foldersRouter = express.Router()
 const jsonParser = express.json()
 
-const serializeFolder = folder ({
+const serializeFolder = folder => ({
     id: folder.folder_id,
     name: xss(folder.name),
     note: xss(folder.note),

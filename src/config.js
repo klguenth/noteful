@@ -1,3 +1,4 @@
-export default {
-    API_ENDPOINT: 'http://localhost:9090'
+module.exports = {
+    API_ENDPOINT: 'http://localhost:9090',
+    PORT: 8000
   }

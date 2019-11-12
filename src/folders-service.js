@@ -1,4 +1,4 @@
-import { kStringMaxLength } from "buffer"
+//import { kStringMaxLength } from "buffer"
 
 const FoldersService = {
     getAllFolders(knex) {
@@ -28,4 +28,4 @@ const FoldersService = {
     },
 }
 
-module.exports = FoldersService
+module.exports = { FoldersService }
