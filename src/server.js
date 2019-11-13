@@ -1,5 +1,6 @@
 require('dotenv').config()
 const foldersRouter = require('./folders-router')
+const notesRouter = require('./Note/notes-router')
 const express = require('express')
 const morgan = require('morgan')
 const knex = require('knex')
@@ -10,6 +11,7 @@ console.log(process.env.API_TOKEN)
 const app = express();
 app.use(morgan('dev'));
 app.use('/api', foldersRouter);
+app.use('/api', notesRouter);
 
 const db = knex({
     client: 'pg',
