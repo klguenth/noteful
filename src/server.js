@@ -3,7 +3,6 @@ const foldersRouter = require('./folders-router')
 const notesRouter = require('./Note/notes-router')
 const express = require('express')
 const morgan = require('morgan')
-const knex = require('knex')
 const { PORT, DB_URL } = require('./config')
 console.log('Port equals', PORT)
 console.log(process.env.API_TOKEN)
@@ -13,12 +12,12 @@ app.use(morgan('dev'));
 app.use('/api', foldersRouter);
 app.use('/api', notesRouter);
 
-const db = knex({
-    client: 'pg',
-    connection: DB_URL,
-})
-
 app.set('db', db)
+
+const knexInstance = knex({
+    client: 'pg',
+    connection: process.env.DB_URL,
+})
 
 app.get('/', (req, res) => {
     res.send('Noteful Express');
@@ -27,3 +26,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express server listening on http://localhost:${PORT}.`);
 });
+
+module.exports = app
