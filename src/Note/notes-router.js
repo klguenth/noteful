@@ -14,25 +14,30 @@ const serializeNote = note => ({
     folder_id: folder.folder_id,
 })
 
-NotesService.getAllNotes(knexInstance)
-    .then(notes => console.log(notes))
-    .then(() =>
-        NotesService.insertNote(knexInstance, {
-            content: 'New content',
-            date_published: new Date(),
-        })
-    )
-    .then(newNote => {
-        console.log(newNote)
-        return NotesService.updateNote(
-            knexInstance,
-            newNote.id
-        ).then(() => NotesService.getById(knexInstance, newNote.id))
-    })
-    .then(note => {
-        console.log(note)
-        return NotesService.deleteNote(knexInstance, note.id)
-    })
+/*notesRouter
+    .route('/')
+    .get((req, res, next) => {
+        const knexInstance = req.app.get('db')
+        NotesService.getAllNotes(knexInstance)
+            .then(notes => console.log(notes))
+            .then(() =>
+                NotesService.insertNote(knexInstance, {
+                    content: 'New content',
+                    date_published: new Date(),
+                })
+            )
+            .then(newNote => {
+                console.log(newNote)
+                return NotesService.updateNote(
+                    knexInstance,
+                    newNote.id
+                ).then(() => NotesService.getById(knexInstance, newNote.id))
+            })
+            .then(note => {
+                console.log(note)
+                return NotesService.deleteNote(knexInstance, note.id)
+            })
+})*/
 
 notesRouter
     .route('/note')
@@ -46,7 +51,7 @@ notesRouter
     })
     .post(jsonParser, (req, res, next) => {
         const { content, folder_id, date_created } = req.body
-        const newComment = { content, folder_id, date_created }
+        const newNote = { content, folder_id, date_created }
 
         for (const [key, value] of Object.entries(newNote))
             if (value == null)

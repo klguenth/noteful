@@ -10,15 +10,16 @@ console.log(process.env.API_TOKEN)
 
 const app = express();
 app.use(morgan('dev'));
-app.use('/api', foldersRouter);
-app.use('/api', notesRouter);
+app.use('/api/folders', foldersRouter);
+app.use('/api/notes', notesRouter);
 
-app.set('db', db)
 
 const knexInstance = knex({
     client: 'pg',
     connection: process.env.DB_URL,
 })
+
+app.set('db', knexInstance)
 
 app.get('/', (req, res) => {
     res.send('Noteful Express');
@@ -29,3 +30,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app
+module.exports = knexInstance
