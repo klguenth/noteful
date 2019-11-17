@@ -5,6 +5,9 @@ const xss = require('xss')
 const NotesService = require('./notes-service')
 const notesRouter = express.Router()
 const jsonParser = express.json()
+const uuid = require('uuid/v4')
+
+const notes = [];
 
 const serializeNote = note => ({
     id: note.id,
@@ -50,8 +53,16 @@ notesRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { content, folder_id, date_created } = req.body
-        const newNote = { content, folder_id, date_created }
+        const { note_name, content, folder_id, date_created } = req.body
+        const id = uuid()
+        const newNote = {
+            note_name, 
+            content, 
+            id, 
+            date_created
+        }
+        notes.push(newNote)
+        console.log(newNote)
 
         for (const [key, value] of Object.entries(newNote))
             if (value == null)
