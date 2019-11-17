@@ -5,7 +5,6 @@ const xss = require('xss')
 const NotesService = require('./notes-service')
 const notesRouter = express.Router()
 const jsonParser = express.json()
-const uuid = require('uuid/v4')
 
 const notes = [];
 
@@ -54,15 +53,13 @@ notesRouter
     })
     .post(jsonParser, (req, res, next) => {
         const { note_name, content, folder_id, date_created } = req.body
-        const id = uuid()
         const newNote = {
             note_name, 
             content, 
-            id, 
+            folder_id, 
             date_created
         }
         notes.push(newNote)
-        console.log(newNote)
 
         for (const [key, value] of Object.entries(newNote))
             if (value == null)
@@ -72,6 +69,7 @@ notesRouter
 
         newNote.date_created = date_created;
 
+        console.log(newNote);
         NotesService.insertNote(
             req.app.get('db'),
             newNote
