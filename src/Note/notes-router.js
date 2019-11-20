@@ -88,7 +88,7 @@ notesRouter
     .all((req,res,next) => {
         NotesService.getById(
             req.app.get('db'),
-            req.params.comment_id
+            req.params.note_id
         )
             .then(note => {
                 if (!note) {
@@ -99,40 +99,41 @@ notesRouter
                 res.note = note
                 next()
             })
-            .get((req, res, next) => {
-                res.json(serializeNote(res.note))
+            .catch(next)
+    })
+    .get((req, res, next) => {
+        res.json(serializeNote(res.note))
+    })
+    .delete((req, res, next) => {
+        NotesService.deleteNote(
+            req.app.get('db'),
+            req.params.note_id
+        )
+            .then(numRowsAffected => {
+                res.status(204).end()
             })
-            .delete((req, res, next) => {
-                NotesService.deleteNote(
-                    req.app.get('db'),
-                    req.params.note_id
-                )
-                    .then(numRowsAffected => {
-                        res.status(204).end()
-                    })
-                    .catch(next)
-            })
-            .patch(jsonParser, (req, res, next) => {
-                const { content, modified } = req.body
-                const noteToUpdate = { content, modified }
+            .catch(next)
+    })
+    .patch(jsonParser, (req, res, next) => {
+        const { content, modified } = req.body
+        const noteToUpdate = { content, modified }
 
-                const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length
-                if (numberOfValues === 0)
-                    return res.status(400).json({
-                        error: {
-                            message: `Request body must contain either 'content' or 'modified'`
-                        }
-                    })
-                NotesService.updateNote(
-                    req.app.get('db'),
-                    req.params.note_id,
-                    noteToUpdate
-                )
-                    .then(numRowsAffected => {
-                        res.status(204).end()
-                    })
-                    .catch(next)
+        const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length
+        if (numberOfValues === 0)
+            return res.status(400).json({
+                error: {
+                    message: `Request body must contain either 'content' or 'modified'`
+                }
             })
+        NotesService.updateNote(
+            req.app.get('db'),
+            req.params.note_id,
+            noteToUpdate
+        )
+            .then(numRowsAffected => {
+                res.status(204).end()
+            })
+            .catch(next)
     })
 
     module.exports = notesRouter
