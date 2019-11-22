@@ -1,4 +1,3 @@
-//import { kStringMaxLength } from "buffer"
 
 const FoldersService = {
     getAllFolders(knex) {

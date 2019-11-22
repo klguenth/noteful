@@ -25,8 +25,8 @@ foldersRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { folder_name, note } = req.body
-        const newFolder = { folder_name, note }
+        const { folder_name } = req.body
+        const newFolder = { folder_name }
         folders.push(newFolder)
 
         for (const [key, value] of Object.entries(newFolder))
@@ -58,10 +58,10 @@ foldersRouter
             .then(folder => {
                 if (!folder) {
                     return res.status(404).json({
-                        error: { message: `Article doesn't exist` }
+                        error: { message: `Folder doesn't exist` }
                     })
                 }
-                res.folder = article
+                res.folder = folder
                 next()
             })
             .catch(next)
