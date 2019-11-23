@@ -16,7 +16,7 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-
+    console.log('note id ', typeof noteId);
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
@@ -73,7 +73,7 @@ export default class Note extends React.Component {
 
 Note.propTypes = {
   name: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.number,
   modified: PropTypes.string,
   content: PropTypes.string
 }

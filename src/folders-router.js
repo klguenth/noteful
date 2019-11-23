@@ -25,6 +25,7 @@ foldersRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
+        console.log('POST called');
         const { folder_name } = req.body
         const newFolder = { folder_name }
         folders.push(newFolder)
@@ -39,32 +40,32 @@ foldersRouter
             req.app.get('db'),
             newFolder
         )
-            .then(folder => {
-                res
-                    .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${folder.id}`))
-                    .json(serializeFolder(folder))
-            })
-            .catch(next)
+        .then(folder => {
+            res
+                .status(201)
+                .location(path.posix.join(req.originalUrl, `/${folder.id}`))
+                .json(serializeFolder(folder))
+        })
+        .catch(next)
     })
 
 foldersRouter
-    .route('/:folder_id')
+    .route('/folder/:folder_id')
     .all((req, res, next) => {
         FoldersService.getById(
             req.app.get('db'),
             req.params.folder_id
         )
-            .then(folder => {
-                if (!folder) {
-                    return res.status(404).json({
-                        error: { message: `Folder doesn't exist` }
-                    })
-                }
-                res.folder = folder
-                next()
-            })
-            .catch(next)
+        .then(folder => {
+            if (!folder) {
+                return res.status(404).json({
+                    error: { message: `Folder doesn't exist` }
+                })
+            }
+            res.folder = folder
+            next()
+        })
+        .catch(next)
     })
     .get((req, res, next) => {
         res.json(serializeFolder(res.folder))
