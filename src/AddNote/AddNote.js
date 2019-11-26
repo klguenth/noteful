@@ -30,6 +30,7 @@ export default class AddNote extends React.Component {
         body: JSON.stringify(newNote)
         })
         .then(res => {
+            console.log(res);
           if (!res.ok)
             return res.json().then(e => Promise.reject(e))
           return res.json()

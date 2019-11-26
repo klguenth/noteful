@@ -59,7 +59,7 @@ notesRouter
     })
 
 notesRouter
-    .route('/:note_id')
+    .route('/note/:note_id')
     .all((req,res,next) => {
         NotesService.getById(
             req.app.get('db'),
@@ -85,7 +85,10 @@ notesRouter
             req.params.note_id
         )
             .then(numRowsAffected => {
-                res.status(204).end()
+                //checking error (text v json)
+                res.status(204).text()
+                .then(text => console.log(text))
+                .end()
             })
             .catch(next)
     })

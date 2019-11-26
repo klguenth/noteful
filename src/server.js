@@ -5,6 +5,7 @@ const express = require('express')
 const morgan = require('morgan')
 const knex = require('knex')
 const { PORT, DB_URL } = require('./config')
+const cors = require('cors')
 console.log('Port equals', PORT)
 console.log(process.env.API_TOKEN)
 
