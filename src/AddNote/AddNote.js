@@ -16,13 +16,13 @@ export default class AddNote extends React.Component {
       handleAddNote = event => {
         event.preventDefault()
         const newNote = {};
-        newNote.name = event.target.name.value;
+        newNote.note_name = event.target.name.value;
         newNote.content = event.target.content.value;
-        newNote.folderId = event.target.folder.value;
-        newNote.noteId = this.props.id;
+        newNote.folder_id = event.target.folder.value;
+        newNote.id = this.props.id;
         newNote.modified = new Date();
         
-    fetch(`${config.API_ENDPOINT}/notes`, {
+    fetch(`${config.API_ENDPOINT}/notes/note`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -38,7 +38,7 @@ export default class AddNote extends React.Component {
         .then((data) => {
           this.context.addNote(data)
           //this.props.addNote(noteId)
-          this.props.history.push(`/folder/${data.folderId}`);
+          this.props.history.push(`/folder/${data.folder_id}`);
         })
         .catch(error => {
           console.error({ error })
@@ -47,6 +47,7 @@ export default class AddNote extends React.Component {
     
     render() {
         const { notes, folders } = this.context
+        console.log(folders);
         const { noteId } = this.props.match.params
         const note = findNote(notes, noteId) || {}
         const folder = findFolder(folders, note.folderId)

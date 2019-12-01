@@ -9,9 +9,8 @@ const jsonParser = express.json()
 const folders = [];
 
 const serializeFolder = folder => ({
-    id: folder.folder_id,
-    name: xss(folder.name),
-    note: xss(folder.note),
+    id: folder.id,
+    name: xss(folder.folder_name)
 })
 
 foldersRouter
