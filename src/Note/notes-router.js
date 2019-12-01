@@ -82,7 +82,6 @@ notesRouter
             req.params.note_id
         )
             .then(numRowsAffected => {
-                //checking error (text v json)
                 res.status(204)
                 .end()
             })
