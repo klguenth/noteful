@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ApiContext from '../ApiContext'
-import config from '../config'
-import PropTypes from 'prop-types'
-import './Note.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ApiContext from '../ApiContext';
+import config from '../config';
+import PropTypes from 'prop-types';
+import './Note.css';
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -16,35 +16,35 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-    console.log('note id ', typeof noteId);
     fetch(`${config.API_ENDPOINT}/notes/note/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
       },
     })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
-      .then(() => {
-        this.context.deleteNote(noteId)
-        // allow parent to perform extra behaviour
-        this.props.onDeleteNote(noteId)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
+    .then(res => {
+      if (!res.ok)
+        return res.json().then(e => Promise.reject(e))
+      return res;
+    })
+    .then(() => {
+      this.context.deleteNote(noteId)
+      // allow parent to perform extra behaviour
+      this.props.onDeleteNote(noteId)
+    })
+    .catch(error => {
+      console.error({ error })
+    })
   }
 
   render() {
-    const { note_name, id, content, modified } = this.props
+    console.log(this.props);
+    const { name, id, content, modified } = this.props
     return (
       <div className='Note'>
         <h2 className='Note__title'>
           <Link to={`/notes/note/${id}`}>
-            { content }
+            { name }
           </Link>
         </h2>
         <button

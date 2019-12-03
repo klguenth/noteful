@@ -30,18 +30,16 @@ export default class AddNote extends React.Component {
         body: JSON.stringify(newNote)
         })
         .then(res => {
-            console.log(res);
           if (!res.ok)
             return res.json().then(e => Promise.reject(e))
           return res.json()
         })
-        .then((data) => {
-          this.context.addNote(data, () => {
-              return data
+        .then((res) => {
+            console.log(res)
+          this.context.addNote(res, () => {
+              return res
           })
-        })
-        .then (data => {
-            this.props.history.push(`/folders/folder/${data.id}`)
+          this.props.history.push(`/folder/${res.folder_id}`)
         })
         .catch(error => {
           console.error({ error })
