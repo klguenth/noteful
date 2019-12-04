@@ -29,7 +29,7 @@ export default class NoteListMain extends React.Component {
                   <li key={note.id}>
                     <Note
                       id={note.id}
-                      name={note.note_name}
+                      note_name={note.note_name}
                       content={note.content}
                       modified={note.modified}
                     />
@@ -58,6 +58,6 @@ export default class NoteListMain extends React.Component {
 
 NoteListMain.propTypes = {
   id: PropTypes.number,
-  name: PropTypes.string,
+  note_name: PropTypes.string,
   modified: PropTypes.string
 }

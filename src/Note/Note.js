@@ -38,12 +38,12 @@ export default class Note extends React.Component {
   }
 
   render() {
-    const { id, content, modified } = this.props
+    const { note_name, id, content, modified } = this.props
     return (
       <div className='Note'>
         <h2 className='Note__title'>
           <Link to={`/notes/note/${id}`}>
-            { content }
+            { note_name }
           </Link>
         </h2>
         <button
@@ -71,7 +71,7 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  name: PropTypes.string,
+  note_name: PropTypes.string,
   id: PropTypes.number,
   modified: PropTypes.string,
   content: PropTypes.string
