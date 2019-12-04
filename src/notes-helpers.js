@@ -10,7 +10,7 @@ export const getNotesForFolder = (notes=[], folder_id) => (
   ? notes
   : notes.filter(note => {
     console.log(typeof note.folder_id, typeof folder_id, 'CONSOLE LOG');
-    return note.folder_id === folder_id
+    return note.folder_id === parseInt(folder_id)
   })
 )
 
