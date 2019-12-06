@@ -56,6 +56,9 @@ export default class Note extends React.Component {
           {' '}
           remove
         </button>
+        <div className='Note__content'>
+          { content }
+        </div>
         <div className='Note__dates'>
           <div className='Note__dates-modified'>
             Modified

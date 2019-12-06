@@ -20,6 +20,7 @@ export default class NoteListMain extends React.Component {
     const { folderId } = this.props.match.params
     const { notes=[] } = this.context
     const notesForFolder = getNotesForFolder(notes, folderId)
+    console.log('notesForFolder:', notesForFolder);
     return (
       <>
         <section className='NoteListMain'>
@@ -59,5 +60,6 @@ export default class NoteListMain extends React.Component {
 NoteListMain.propTypes = {
   id: PropTypes.number,
   note_name: PropTypes.string,
+  content: PropTypes.string,
   modified: PropTypes.string
 }
