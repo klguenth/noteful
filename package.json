@@ -25,7 +25,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "CI=true react-scripts test --colors",
     "build": "react-scripts build",
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
