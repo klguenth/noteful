@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotePageMain component renders a .NotePageMain by default 1`] = `
+<Fragment>
+  <section
+    className="NotePageMain"
+  >
+    <Note
+      content=""
+      onDeleteNote={[Function]}
+    />
+    <div
+      className="NotePageMain__content"
+    >
+      <p
+        key="0"
+      />
+    </div>
+  </section>
+</Fragment>
+`;
+
+exports[`NotePageMain component renders a Note with note prop 1`] = `
+<Note
+  content=""
+  onDeleteNote={[Function]}
+/>
+`;
+
+exports[`NotePageMain component splits the content by \\n or \\n\\r, with a p foreach 1`] = `null`;
+
+exports[`NotePageMain component splits the content by \\n or \\n\\r, with a p foreach 2`] = `null`;
