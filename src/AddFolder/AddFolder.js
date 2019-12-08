@@ -18,7 +18,6 @@ export default class AddFolder extends React.Component {
       event.preventDefault();
       const newFolder = {};
       newFolder.folder_name = event.target.name.value;
-      console.log('about to fetch');
       fetch(`${config.API_ENDPOINT}/folders/folder`, {
         method: 'POST',
         headers: {
@@ -27,7 +26,6 @@ export default class AddFolder extends React.Component {
         body: JSON.stringify(newFolder)
       })
       .then(res => {
-        console.log('fetch responding');
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
         return res.json()

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ApiContext from '../ApiContext';
@@ -38,7 +37,7 @@ export default class Note extends React.Component {
   }
 
   render() {
-    const { note_name, id, content, modified } = this.props
+    const { note_name, content, modified } = this.props
     return (
       <div className='Note'>
         <h2 className='Note__title'>

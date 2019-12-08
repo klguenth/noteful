@@ -24,7 +24,6 @@ foldersRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        console.log('POST called');
         const { folder_name } = req.body
         const newFolder = { folder_name }
         folders.push(newFolder)
@@ -34,7 +33,6 @@ foldersRouter
                 return res.status(400).json({
                     error: { message: `Missing '${key}' in request body` }
                 })
-        console.log(newFolder);
         FoldersService.insertFolder(
             req.app.get('db'),
             newFolder
