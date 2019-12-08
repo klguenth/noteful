@@ -9,5 +9,6 @@
   .NotePageMain__content {
     color: #3a3939;
     max-width: 380px;
+    overflow-wrap: break-word;
   }
   

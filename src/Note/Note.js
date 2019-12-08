@@ -42,9 +42,7 @@ export default class Note extends React.Component {
     return (
       <div className='Note'>
         <h2 className='Note__title'>
-          <Link to={`/notes/note/${id}`}>
             { note_name }
-          </Link>
         </h2>
         <button
           className='Note__delete'
